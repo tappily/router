@@ -1,1 +1,18 @@
-
+<!doctype html>
+{{#html-supports supports}}<html lang="en">{{/html-supports}}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{default title page.basename}}</title>
+  <meta name="description" content="{{default description site.description}}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{#block 'styles'}}{{css 'default.css'}}{{/block}}
+  {{{tk-js typekit}}}
+</head>
+<body>
+  {{#block 'header'}}<header>…</header>{{/block}}
+  {{#block 'main'}}<main>{{> body}}</main>{{/block}}
+  {{#block 'footer'}}<footer>…</footer>{{/block}}
+  {{#block 'scripts'}}{{/block}}
+</body>
+</html>

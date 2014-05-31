@@ -1,0 +1,13 @@
+host: use.typekit.net
+id: nck6uhj
+faces:
+  - family: adobe-clean
+    styles:
+      - variation: light
+        weight: 300
+      - variation: regular
+        weight: 400
+      - variation: bold
+        weight: 700
+      - style: black
+        weight: 900
