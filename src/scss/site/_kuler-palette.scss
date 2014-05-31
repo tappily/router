@@ -1,0 +1,25 @@
+@mixin kuler-palette ($colors...) {
+  $length: length($colors);
+  $stop-size: 100% / $length;
+  $bg: '';
+
+  @for $i from 1 through $length {
+    $color: nth($colors, $i);
+    $bg: $bg + ','
+      + $color + ' ' + ($stop-size * ($i - 1)) + ','
+      + $color + ' ' + ($stop-size * $i);
+  }
+
+  &:after {
+    font-size: inherit;
+    line-height: inherit;
+    content: "";
+    display: inline-block;
+    height: 1.25em;
+    width: 10em;
+    vertical-align: middle;
+    margin: -0.5ex 1ex;
+    background-image: linear-gradient + '(90deg' + $bg + ')';
+    background-repeat: repeat-y;
+  }
+}

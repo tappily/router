@@ -1,0 +1,185 @@
+@mixin ornament-flex-rule($border...) {
+  display: flex;
+  flex-flow: row;
+
+  &:before, &:after {
+    content: "";
+    display: block;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    border-top: $border;
+    transform: translateY(50%);
+  }
+
+  &:before {
+    margin-right: 1ex;
+  }
+  &:after {
+    margin-left: 1ex;
+  }
+}
+
+@mixin cover-letterpress ($basis: black) {
+  $contrast: invert($basis);
+  background-color: mix($basis, $contrast, 67%);
+  color: rgba($contrast, 0.9);
+  text-shadow: 0 0 1px rgba($basis, 0.67);
+}
+
+@mixin cover-color-basis ($basis: black) {
+  @include cover-letterpress ($basis);
+
+  h3 {
+    @include ornament-flex-rule(1px solid rgba(invert($basis), 0.5));
+  }
+}
+
+@mixin cover-image-layout {
+  position: relative;
+  z-index: 1;
+
+  &:before {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    content: "";
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-position 0.48s;
+
+    @media only screen and (max-width: 56em) {
+      position: relative;
+      height: 21em;
+    }
+  }
+
+  &:after {
+    content: "";
+    display: inline-block;
+  }
+}
+
+
+@mixin cover-image-source ($src, $align: center center) {
+  &:before {
+    background-image: $src;
+    background-position: $align;
+  }
+}
+
+@mixin cover-layout-flex ($direction: column, $align: start) {
+  flex-direction: $direction;
+  justify-content: flex-#{$align};
+}
+
+@mixin cover-length ($title: 30em, $detail: 30em) {
+  .title {
+    max-width: $title;
+  }
+  .detail {
+    max-width: $detail;
+  }
+}
+
+@mixin cover-layout {
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+
+  @include cover-layout-flex;
+
+  @include cover-image-layout;
+
+  figcaption, aside {
+    margin: 10em 4em;
+
+    @media only screen and (max-width: 56em) {
+      margin: 2em;
+    }
+  }
+
+  figcaption, aside {
+    max-width: 30em;
+  }
+
+  figcaption {
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.5;
+
+    .title {
+      font-weight: 300;
+      font-size: 2.25em;
+      line-height: 1.125;
+      margin: 0;
+    }
+
+    .detail {
+      display: flex;
+      margin: 1.5em 0;
+      line-height: inherit;
+      text-align: justify;
+
+      @media only screen and (max-width: 56em) {
+        text-align: initial;
+      }
+
+      img {
+        float: left;
+        font-size: inherit;
+        flex-grow: 0;
+        flex-shrink: 0;
+        max-width: 4em;
+        max-height: 4em;
+        margin-right: 1.5em;
+      }
+    }
+
+    .route {
+      //margin-left: 4em + 1.5em;
+    }
+  }
+
+  aside {
+    display: block;
+    //align-self: flex-end;
+
+    nav {
+      margin: 1.25em -1ex;
+      display: block;
+      position: relative;
+      line-height: 2;
+      text-align: center;
+
+      :link {
+        margin: 0 1ex;
+        display: inline-block;
+
+        img {
+          vertical-align: middle;
+          display: inline-block;
+          margin: -0.5ex 0.5ex;
+          max-height: 1.5em;
+        }
+      }
+    }
+  }
+
+}
+
+.cover {
+  :link,
+  :visited {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  @include cover-layout;
+}

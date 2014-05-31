@@ -1,0 +1,18 @@
+h1 {
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 1em;
+  z-index: 2;
+  width: 6em;
+  font-size: inherit;
+  transition: width 0.24s;
+
+  @media only screen and (max-width: 56em) {
+    width: 3em;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}

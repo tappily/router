@@ -1,0 +1,236 @@
+//imports
+@import "tabs/mixins";
+@import "../kuler-palette";
+@import "../button";
+
+//defaults
+$tab-focus-fill: #222 !default;
+$tab-fill: #666 !default;
+$tab-transition: 0.48s !default;
+$tab-menu-fill: #333 !default;
+$tab-section-fill: #666 !default;
+$tab-label-basis: 25% !default;
+$tab-label-center-basis: $tab-label-basis * 0.5 !default;
+
+//hide state controls
+@mixin tab-sneak {
+  > input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+}
+
+//colors and fonts
+@mixin tab-palette {
+  background-color: $tab-fill;
+
+  & > nav {
+    color: $tab-menu-fill;
+    box-shadow: 0 0 5em rgba(white, 0.5);
+    font-size: 0.875em;
+    font-weight: 400;
+    line-height: 1.25;
+
+    &:before, &:after {
+      color: $tab-focus-fill;
+      transition: width $tab-transition;
+    }
+
+    label {
+      text-align: center;
+      background-color: $tab-menu-fill;
+      color: invert($tab-menu-fill);
+
+      &:before,
+      &:after {
+        border-bottom-color: $tab-menu-fill;
+        transition: width $tab-transition;
+      }
+    }
+  }
+
+  figure,
+  section {
+    background-color: $tab-section-fill;
+  }
+
+}
+
+// layout
+@mixin tab-layout {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  > nav {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    box-sizing: border-box;
+
+    &:before, &:after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      bottom: 0;
+      box-sizing: border-box;
+      height: 0;
+      border-bottom-width: 1em;
+      border-bottom-style: solid;
+    }
+
+    &:before {
+      left: 0;
+      border-right: 1em solid transparent;
+    }
+
+    &:after {
+      right: 0;
+      border-left: 1em solid transparent;
+    }
+
+    label {
+      position: relative;
+      padding: 2ex 1em;
+      display: inline-block;
+      box-sizing: border-box;
+      flex-basis: 25%;
+
+      &:before,
+      &:after {
+        bottom: 100%;
+        content: "";
+        display: block;
+        position: absolute;
+        width: 50%;
+        box-sizing: border-box;
+        height: 0;
+        border-bottom-width: 1em;
+        border-bottom-style: solid;
+      }
+
+      &:before {
+        border-right: 1em solid transparent;
+        width: 100%;
+        left: 0;
+      }
+
+      &:after {
+        border-left: 1em solid transparent;
+        width: 100%;
+        right: 0;
+      }
+    }
+  }
+
+  section {
+    flex-grow: 1;
+    position: relative;
+    z-index: 0;
+    top: 0;
+  }
+}
+
+@mixin tab-section-display($display) {
+  @if $display == none {
+    //position: absolute;
+    //visibility: hidden;
+    //opacity: 0;
+    //min-height: initial;
+    //max-height: 0;
+    //overflow: hidden;
+  } @else {
+    //display: $display;
+    //visibility: visible;
+    //position: relative;
+    //opacity: 1;
+    //min-height: 100vh;
+    //max-height: initial;
+    //overflow: initial;
+  }
+  display: $display;
+}
+
+//display switches
+@mixin tab-visible {
+
+  section {
+    transition: $tab-transition opacity;
+  }
+
+  input[type=radio] {
+
+    &:checked {
+      & ~ section {
+        @include tab-section-display(none);
+      }
+
+      & ~ label {
+
+        &:before,
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+//ordered controls
+@mixin tab-nth($n) {
+  input:nth-of-type(#{$n}) {
+    &:checked {
+
+      & ~ nav {
+
+        $label-basis: $tab-label-basis * $n - $tab-label-center-basis;
+
+        &:before {
+          width: $label-basis;
+        }
+
+        &:after {
+          width: (100% - $label-basis);
+        }
+
+        label:nth-of-type(#{$n}) {
+
+          &:before, &:after {
+            width: 50%;
+          }
+        }
+      }
+
+      & ~ section {
+        &:nth-of-type(#{$n}) {
+          @include tab-section-display(block);
+        }
+      }
+    }
+
+    &:focus {
+      & ~ nav  {
+        label:nth-of-type(#{$n}) {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+//define
+.tabs {
+  @include tab-sneak;
+  @include tab-palette;
+  @include tab-layout;
+  @include tab-visible;
+  @include tab-nth(1);
+  @include tab-nth(2);
+  @include tab-nth(3);
+  @include tab-nth(4);
+}

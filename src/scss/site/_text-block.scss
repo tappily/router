@@ -1,0 +1,9 @@
+@mixin text-block ($x, $y, $factor: 1.5) {
+  font-size: $x;
+  line-height: $y;
+
+  $margin: 1 / ($x * $y) * $factor +  em;
+
+  margin-top: $margin;
+  margin-bottom: $margin;
+}

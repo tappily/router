@@ -1,0 +1,45 @@
+@import "router/default";
+@import "router/tabs";
+@import "router/cover";
+
+.button {
+  @include button;
+}
+
+.kuler-palette {
+  @include kuler-palette(#8F030E, #420306, #C2001E, #575713, #3E3113);
+}
+
+#f1 {
+  @include cover-color-basis(black);
+  @include cover-image-source(url('//www.adobe.com/special/dom/prod/homepage/v9/en-US/img/heroes/cc/hero.jpg'));
+
+  figcaption {
+    @include cover-length(8em);
+  }
+
+  @media only screen and (max-width: 56em) {
+    @include cover-image-source(url('//www.adobe.com/special/dom/prod/homepage/v9/en-US/img/heroes/cc/hero.jpg'), 70% 0);
+  }
+}
+#f2 {
+  @include cover-color-basis(black);
+  @include cover-image-source(url('//www.adobe.com/special/dom/prod/homepage/v9/en-US/img/heroes/mc/hero.jpg'));
+
+  figcaption {
+    @include cover-length(initial, 21em);
+  }
+}
+#f3 {
+  @include cover-color-basis(white);
+  @include cover-image-source(url('//www.adobe.com/special/dom/prod/homepage/v9/en-US/img/heroes/ds/hero.jpg'));
+  @include cover-layout-flex(row, end);
+
+  @media only screen and (max-width: 56em) {
+    @include cover-layout-flex(column, start);
+  }
+}
+
+#f4 {
+  @include cover-color-basis(white);
+}
