@@ -1,0 +1,9 @@
+@mixin rgb-kind($property, $color) {
+
+  #{$property}: rgb(red($color), green($color), blue($color));
+
+  @if alpha($color) < 1 {
+    #{$property}: $color;
+  }
+
+}

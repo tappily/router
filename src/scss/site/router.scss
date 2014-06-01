@@ -19,7 +19,7 @@
   }
 
   @media only screen and (max-width: 56em) {
-    @include cover-image-source(url('//www.adobe.com/special/dom/prod/homepage/v9/en-US/img/heroes/cc/hero.jpg'), 70% 0);
+    @include cover-image-align(70% 0);
   }
 }
 #f2 {
@@ -27,7 +27,7 @@
   @include cover-image-source(url('//www.adobe.com/special/dom/prod/homepage/v9/en-US/img/heroes/mc/hero.jpg'));
 
   figcaption {
-    @include cover-length(initial, 21em);
+    @include cover-length(none, 21em);
   }
 }
 #f3 {

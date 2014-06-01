@@ -1,4 +1,4 @@
-@mixin ornament-flex-rule($border...) {
+@mixin ornament-flex-rule($border, $color: inherit) {
   display: flex;
   flex-flow: row;
 
@@ -9,6 +9,9 @@
     flex-shrink: 1;
     flex-basis: auto;
     border-top: $border;
+    @if $color != inherit  {
+      @include rgb-kind(border-top-color, $color);
+    }
     transform: translateY(50%);
   }
 
@@ -23,15 +26,15 @@
 @mixin cover-letterpress ($basis: black) {
   $contrast: invert($basis);
   background-color: mix($basis, $contrast, 67%);
-  color: rgba($contrast, 0.9);
+  @include rgb-kind(color, rgba($contrast, 0.9));
   text-shadow: 0 0 1px rgba($basis, 0.67);
 }
 
 @mixin cover-color-basis ($basis: black) {
   @include cover-letterpress ($basis);
 
-  h3 {
-    @include ornament-flex-rule(1px solid rgba(invert($basis), 0.5));
+  aside .title {
+    @include ornament-flex-rule(1px solid, rgba(invert($basis), 0.5));
   }
 }
 
@@ -49,6 +52,7 @@
     z-index: -1;
     content: "";
     background-size: cover;
+    background-position: 50% 50%;
     background-repeat: no-repeat;
     transition: background-position 0.48s;
 
@@ -65,14 +69,21 @@
 }
 
 
-@mixin cover-image-source ($src, $align: center center) {
+@mixin cover-image-source ($src) {
   &:before {
     background-image: $src;
+  }
+}
+
+@mixin cover-image-align ($align: center center) {
+  &:before {
     background-position: $align;
   }
 }
 
-@mixin cover-layout-flex ($direction: column, $align: start) {
+@mixin cover-layout-flex ($direction: column, $align: space-between) {
+  flex: 1;
+  display: flex;
   flex-direction: $direction;
   justify-content: flex-#{$align};
 }
@@ -89,12 +100,8 @@
 @mixin cover-layout {
   margin: 0;
   padding: 0;
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-
+  min-height: 100vh;
   @include cover-layout-flex;
-
   @include cover-image-layout;
 
   figcaption, aside {
@@ -142,14 +149,11 @@
       }
     }
 
-    .route {
-      //margin-left: 4em + 1.5em;
-    }
+    .route {}
   }
 
   aside {
     display: block;
-    //align-self: flex-end;
 
     nav {
       margin: 1.25em -1ex;
