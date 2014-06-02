@@ -1,4 +1,5 @@
 {{#extend 'default'}}
   {{#content 'styles' mode='append'}}{{{css 'router.css'}}}{{/content}}
   {{#content 'main'}}<main>{{> body}}</main>{{/content}}
+  {{#content 'scripts' mode='append'}}{{js 'tabs.js'}}{{/content}}
 {{/extend}}

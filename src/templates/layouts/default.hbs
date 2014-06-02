@@ -2,12 +2,13 @@
 {{#html-supports supports}}<html lang="en">{{/html-supports}}
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>{{default title page.basename}}</title>
   <meta name="description" content="{{default description site.description}}">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  {{#block 'styles'}}{{css 'default.css'}}{{/block}}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css"/>
   {{{tk-js typekit}}}
+  {{#block 'styles'}}{{css 'default.css'}}{{/block}}
 </head>
 <body>
   {{#block 'header'}}<header>…</header>{{/block}}

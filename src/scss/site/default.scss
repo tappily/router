@@ -1,11 +1,36 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
+html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  display: block;
+  overflow-y: auto;
+  //-webkit-overflow-scrolling: touch;
+}
+
 body {
-  min-height: 100vh;
-  font-family: adobe-clean, san-serif;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  //-webkit-overflow-scrolling: touch;
+}
+
+
+
+body {
+  display: block;
+  //position: relative;
+}
+
+main {
+  //overflow: scroll;
 }
 
 header {
