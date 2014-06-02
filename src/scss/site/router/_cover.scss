@@ -60,6 +60,7 @@ $cover-basis: 56em !default;
     @media only screen and (max-width: $cover-basis) {
       position: relative;
       height: 21em;
+      min-height: 50vh;
     }
   }
 }

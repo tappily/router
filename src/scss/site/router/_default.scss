@@ -2,17 +2,18 @@ h1 {
   position: absolute;
   margin: 0;
   top: 0;
-  left: 1em;
   z-index: 2;
   font-size: inherit;
 
   img {
-    width: 6em;
+    width: 5em;
+    margin-left: 3.25em;
     max-width: 100%;
     //transition: 0.24s width;
 
     @media only screen and (max-width: 56em) {
-      width: 3em;
+      width: 4em;
+      margin-left: 1.5em;
     }
   }
 }

@@ -34,6 +34,7 @@ $tab-label-center-basis: $tab-label-basis * 0.5 !default;
     font-size: 0.875em;
     font-weight: 400;
     line-height: 1.25;
+    background-color: $tab-menu-fill;
 
     &:before, &:after {
       color: $tab-focus-fill;
@@ -67,7 +68,6 @@ $tab-label-center-basis: $tab-label-basis * 0.5 !default;
     width: 100%;
     position: absolute;
     z-index: 1;
-
     left: 0;
     box-sizing: border-box;
 
@@ -85,7 +85,6 @@ $tab-label-center-basis: $tab-label-basis * 0.5 !default;
       height: 0;
       border-bottom-width: 1em;
       border-bottom-style: solid;
-
       //transition: $tab-transition width;
     }
 
