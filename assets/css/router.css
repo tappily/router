@@ -2,17 +2,18 @@ h1 {
   position: absolute;
   margin: 0;
   top: 0;
-  left: 1em;
   z-index: 2;
   font-size: inherit;
 }
 h1 img {
-  width: 6em;
+  width: 5em;
+  margin-left: 3.25em;
   max-width: 100%;
 }
 @media only screen and (max-width: 56em) {
   h1 img {
-    width: 3em;
+    width: 4em;
+    margin-left: 1.5em;
   }
 }
 
@@ -33,6 +34,7 @@ h1 img {
   font-size: 0.875em;
   font-weight: 400;
   line-height: 1.25;
+  background-color: #333333;
 }
 .tabs > nav:before, .tabs > nav:after {
   color: #222222;
@@ -347,6 +349,7 @@ h1 img {
   .cover--image:before {
     position: relative;
     height: 21em;
+    min-height: 50vh;
   }
 }
 
