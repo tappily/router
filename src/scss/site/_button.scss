@@ -1,8 +1,9 @@
-@mixin button ($color: dodgerblue) {
+@mixin button ($fill: dodgerblue, $color: white) {
   border-radius: 1ex;
   font-size: inherit;
   line-height: 1.5;
-  background-color: $color;
+  background-color: $fill;
+  color: $color;
   padding: 1ex 1.5em;
   display: inline-block;
   text-align: center;
